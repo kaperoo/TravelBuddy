@@ -26,13 +26,17 @@ $(document).ready(function() {
 
         $(".crow[id=\""+name+"\"]").css({
             "background-color": "#dfbd69",
-            transition: "0.6s"
+            transition: "0.6s",
+            "font-weight": "bold"
         });
     });
     $("svg path").mouseleave(function() {
         var name = $(this).attr('name');
 
-        $(".crow[id=\""+name+"\"]").css("background-color", "#0a525f");
+        $(".crow[id=\""+name+"\"]").css({
+            "background-color": "#0a525f",
+            "font-weight": "normal",
+        });
     });
     $("svg path").click(function() {
         var name = $(this).attr('name');

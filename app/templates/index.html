@@ -3,20 +3,20 @@
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Europe</title>
-        <link rel="stylesheet" href="../static/map.css" type="text/css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../static/map.js"></script>
-    </head>
-    <body>
+<head>
+    <title>Europe</title>
+    <link rel="stylesheet" href="../static/map.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/map.js"></script>
+</head>
+<body>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 scrollable">
             {% for c in countries %}
             <div class="row crow" id="{{c.name}}">
-                <span class="bold"><b>{{ c.name }}</b></span>
+                <span class="">{{ c.name }}</span>
             </div>
             {% endfor %}
         </div>
@@ -129,7 +129,7 @@
     </div>
 </div>
 
-    </body>
+</body>
 </html>
 
 {% endblock %}

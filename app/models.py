@@ -34,11 +34,12 @@ class Country(db.Model):
     #   Unique ID of each country
     id = db.Column(db.Integer, primary_key=True)
     #   Name of each country
-    name = db.Column(db.String(20), unique=True, nullable=False)
+    name = db.Column(db.String(50), unique=True, nullable=False)
     #   Capital of each country
     capital = db.Column(db.String(20), nullable=False)
     #   Coordinates of country capital
-    coordinates = db.Column(db.String(120), nullable=False)
+    lat = db.Column(db.String(120))
+    lang = db.Column(db.String(120))
     #   Language spoken in this country
     language = db.Column(db.String(120), nullable=False)
     #   Currency of this country
