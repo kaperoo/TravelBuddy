@@ -1,0 +1,49 @@
+body{
+    background-color: rgb(38, 38, 38);
+    color: white;
+    overflow-x: hidden;
+}
+nav, footer{
+    background-color: #01171b;
+}
+input, textarea{
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: larger;
+    border-style: solid;
+    border-color: white;
+    color: white;
+    background-color: rgb(98, 110, 129);
+    width: 100%;
+}
+label{
+    float: left;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: larger;
+}
+.addTask{
+    text-align: center;
+}
+.guzik{
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 700;
+    height: 50px;
+}
+input::placeholder, textarea::placeholder{
+    color: white;
+}
+textarea{
+    height: 170px;
+}
+.row{
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: larger;
+}
+.row span.bold{
+    font-weight: 900;
+}
+.row span.thin{
+    font-weight: 400;
+}
+.row span.reg{
+    font-weight: 500;
+}
