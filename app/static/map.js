@@ -43,4 +43,17 @@ $(document).ready(function() {
 
         window.location = "/country/" + name;
     });
+
+    $(window).resize(function() {
+        var scrollP = $(".scrollable").position();
+        $(".scrollable").css({
+            height: "calc(100vh - 40px - "+ scrollP.top + "px)"
+        });
+    });
+    $(document).ready(function() {
+        var scrollP = $(".scrollable").position();
+        $(".scrollable").css({
+            height: "calc(100vh - 40px - "+ scrollP.top + "px)"
+        });
+    });
 });

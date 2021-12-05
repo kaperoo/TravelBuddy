@@ -1,17 +1,18 @@
 body{
     background-color: #0c8195;
+    height: 100vh;
     overflow: hidden;
 }
 .row{
     margin-top: 10px;
 }
 .scrollable{
-    overflow-y: scroll;
-    height: calc(100vh - 135px);
+    height: calc(100vh - 130px);
+    overflow: auto;
 }
 .crow{
     background-color: #0a525f;
-    margin: 5px;
+    margin: 5px; 
     padding: 3px;
 }
 .map{
