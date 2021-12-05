@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-sm-12 forma">
+            <div class="container">
+                <form action="" method="post">
+                    {{form.hidden_tag()}}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 text-center">Sign In</legend>
+                        <div class="form-group">
+                            {{form.email.label(class="form-control-label")}}
+                            {% if form.email.errors %}
+                                {{form.email(class="form-control is-invalid form-control-lg")}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{form.email(class="form-control form-control-lg", placeholder="Email")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{form.password.label(class="form-control-label")}}
+                            {% if form.password.errors %}
+                                {{form.password(class="form-control is-invalid form-control-lg")}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{form.password(class="form-control form-control-lg", placeholder="Password")}}
+                            {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                {{form.remember(class="form-check-input")}}
+                            </div>
+                            <div class="col">
+                                {{form.remember.label(class="form-check-label")}}
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{form.submit(class="btn btn-outline-info")}}
+                    </div>
+                </form>
+            </div>
+            <div class="borred-top pt-3 text-center">
+                <small class="text-muted">
+                    Need an account? 
+                    <a class="ml-2" href="{{url_for('register')}}">Sign Up Now</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

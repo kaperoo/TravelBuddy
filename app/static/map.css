@@ -1,10 +1,11 @@
 body{
-    background-color: #0c8195;
-    height: 100vh;
-    overflow: hidden;
+    overflow: hidden !important;
+    color: white;
 }
 .row{
     margin-top: 10px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: larger;
 }
 .scrollable{
     height: calc(100vh - 130px);
@@ -29,29 +30,9 @@ svg path:hover {
     transition: 0.6s;
     cursor: pointer;
 }
-
 .crow:hover{
     background-color: #dfbd69 !important;
     font-weight: bold !important;
     transition: 0.6s;
     cursor: pointer;
-}
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #59a8c7;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #0e5662;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #073841;
 }

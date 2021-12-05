@@ -1,7 +1,15 @@
 body{
-    background-color: rgb(38, 38, 38);
+    background-color: #0c8195;
+    height: 100vh;
+}
+.forma{
+    background-color: #0a2d3b;
     color: white;
-    overflow-x: hidden;
+    padding: 20px;
+}
+.form-check-label{
+    font-size: medium;
+    
 }
 nav, footer{
     background-color: #01171b;
@@ -20,30 +28,32 @@ label{
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: larger;
 }
-.addTask{
-    text-align: center;
-}
-.guzik{
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-weight: 700;
-    height: 50px;
-}
 input::placeholder, textarea::placeholder{
     color: white;
 }
-textarea{
-    height: 170px;
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
 }
-.row{
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: larger;
+/* Track */
+::-webkit-scrollbar-track {
+    background: #59a8c7;
 }
-.row span.bold{
-    font-weight: 900;
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #0e5662;
 }
-.row span.thin{
-    font-weight: 400;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #073841;
 }
-.row span.reg{
-    font-weight: 500;
+.alert{
+    position: absolute;
+    z-index: 900;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    box-shadow: 0px 0px 10px #0a2d3b;
+    width: 90%;
 }

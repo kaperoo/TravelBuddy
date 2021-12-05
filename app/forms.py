@@ -1,52 +1,48 @@
 from flask_wtf import Form
-from wtforms import StringField
-from wtforms import TextAreaField
-from wtforms import BooleanField
-from wtforms.fields.html5 import DateField
-from wtforms.validators import DataRequired
-from wtforms.validators import Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from app.models import User
 
-#	Form that the uset completes in order to create a new task/assignment
-class TaskForm(Form):
-
-	#	A field to enter the module code with restricted length of 8 characters
-	moduleCode = StringField('Module Code:', 
+class RegistrationForm(Form):
+	username = StringField('Username', 
 								validators=[DataRequired(), 
-								Length(min=8,max=8,message='Invalid Module Code')])
+								Length(min=4,max=20,message='Invalid Username Length')])
 
-	#	A field to enter the title of the assignment (max 20 characters)
-	title = StringField('Assignment Title:', 
-							validators=[DataRequired(), 
-							Length(max=20,message='Invalid Module Code')])
+	email = StringField('Email', 
+							validators=[DataRequired(),
+							Email()])
 
-	#	Textfield to save the description of the task
-	description = TextAreaField('Assignment Description:', 
-									validators=[DataRequired()])
+	password = PasswordField('Password',
+								validators=[DataRequired()])
 
-	#	The deadline of the assignment. Calendar widget to choose the date from
-	deadline = DateField('Deadline:', format='%Y-%m-%d')
+	name = StringField('Name',
+							validators=[DataRequired(),
+							Length(min=1,max=64,message='Invalid Username Length')])
 
-	#	Is the assignment already done (checkbox)
-	isDone = BooleanField('Is it already completed?')
+	confirm_password = PasswordField('Confirm Password',
+										validators=[DataRequired(),
+										EqualTo('password',message='Passwords must match')])
 
-class SignInForm(Form):
+	submit = SubmitField('Sign Up')
 
-	#	A field to enter the module code with restricted length of 8 characters
-	username = StringField('Username:', 
-								validators=[DataRequired(), 
-								Length(min=8,max=8,message='Invalid Module Code')])
+	def validate_username(self, username):
+		user = User.query.filter_by(username=username.data).first()
+		if user:
+			raise ValidationError('Username already taken')
 
-	#	A field to enter the title of the assignment (max 20 characters)
-	title = StringField('Assignment Title:', 
-							validators=[DataRequired(), 
-							Length(max=20,message='Invalid Module Code')])
+	def validate_email(self, email):
+		user = User.query.filter_by(email=email.data).first()
+		if user:
+			raise ValidationError('Email already in use')
 
-	#	Textfield to save the description of the task
-	description = TextAreaField('Assignment Description:', 
-									validators=[DataRequired()])
+class LoginForm(Form):
+	email = StringField('Email', 
+							validators=[DataRequired(),
+							Email()])
 
-	#	The deadline of the assignment. Calendar widget to choose the date from
-	deadline = DateField('Deadline:', format='%Y-%m-%d')
+	password = PasswordField('Password',
+								validators=[DataRequired()])
 
-	#	Is the assignment already done (checkbox)
-	isDone = BooleanField('Is it already completed?')
+	remember = BooleanField('Remember Me')
+
+	submit = SubmitField('Login')

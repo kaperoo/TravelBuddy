@@ -1,10 +1,10 @@
-from flask import render_template, flash, redirect, request
-from app import app, db, models, admin
-from .forms import TaskForm
+from flask import render_template, flash, redirect, request, url_for
+from app import app, db, models, admin, bcrypt
+from .forms import RegistrationForm, LoginForm
 
 from datetime import datetime, timedelta, date
 from flask_admin.contrib.sqla import ModelView 
-
+from flask_login import login_user, current_user, logout_user, login_required
 from .models import User, Country
 
 admin.add_view(ModelView(User, db.session))
@@ -34,40 +34,55 @@ def country(country):
                             title=c.name,
                             c=c)
 
-#   A page where the user can add a new assignment
-@app.route('/addTask', methods=['GET', 'POST'])
-def addTask():
-
+#   A page where the user can register
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect('/')
     #   create an instance of the form from forms.py file
-    form = TaskForm()
+    form = RegistrationForm()
 
-    #   If form is submited and it is valid take an action
     if form.validate_on_submit():
-        
-        #   Assign data from the form to the instance of an object in db
-        task = models.CheckList(moduleCode=form.moduleCode.data,
-                                title=form.title.data,
-                                description=form.description.data,
-                                deadline=form.deadline.data,
-                                isDone=form.isDone.data)
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, name=form.name.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You can now sign in'.format(form.username.data), 'success')
+        return redirect('/login')
 
-        try:
-            #   try to update the db and return to main page
-            db.session.add(task)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "Error"
-    
-    #   to change the active button at the top of the page
-    active = ["","","","active"]
-        
-    #   render the add task page
-    return render_template('addTask.html',
-                           title='Add Task',
-                           form=form,
-                           active=active)
+    return render_template('register.html',
+                           title='Register',
+                           form=form)
 
-#   A page for displaying all the completed assignments
+#   A page where the user can login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect('/')
+    #   create an instance of the form from forms.py file
+    form = LoginForm()
 
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            flash('You have been logged in!', 'success')
+            return redirect(next_page) if next_page else redirect('/')
+        else:    
+            flash('Login Unsuccessful. Please check email and password', 'danger')
 
+    return render_template('login.html',
+                           title='Login',
+                           form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html',
+                           title='Your Account')

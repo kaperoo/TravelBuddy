@@ -1,4 +1,9 @@
-from app import db
+from app import db, loginManager
+from flask_login import UserMixin
+
+@loginManager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 visitors = db.Table('visitors',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -10,10 +15,12 @@ futureVisitors = db.Table('futureVisitors',
     db.Column('country_id', db.Integer, db.ForeignKey('country.id'))
 )
 
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     #   Unique ID of each user
     id = db.Column(db.Integer, primary_key=True)
+    #   Name of the user
+    name = db.Column(db.String(64),nullable=False)
     #   Unique username of each user
     username = db.Column(db.String(20), unique=True, nullable=False)
     #   Password of each user
