@@ -1,4 +1,117 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{current_user.username}}</h1>
+<div class="container accinfo">
+    <div class="row justify-content-center mt-2">
+        <img class="rounded-circle account-img" src="{{imageFile}}">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <h1 class="account-heading display-3">{{current_user.name}}</h1>
+    </div>
+    <div class="row justify-content-center">
+        <h3 class="account-heading">@{{current_user.username}}</h3>
+    </div>
+    <div class="row justify-content-center">
+        <p class="text-secondary">{{current_user.email}}</p>
+    </div>
+
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-md-3 col-sm-12 mb-1">
+            <div class="row pl-2 pt-1 visp">
+                <h4>Visited:</h4>
+            </div>
+            {% for v in current_user.visitedCountries %}
+            <div class="row vis pl-2 pt-1">
+                <h4>{{v.name}}</h4>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1">
+            <div class="row pl-2 pt-1 fvisp">
+                <h4>Bucket List:</h4>
+            </div>
+            {% for b in current_user.bucketList %}
+            <div class="row fvis pl-2 pt-1">
+                <h4>{{b.name}}</h4>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1">
+            <div class="row pl-2 pt-1 livp">
+                <h4>Lives In:</h4>
+            </div>
+            {% if current_user.livesin %}
+            <div class="row liv pl-2 pt-1">
+                <h4>{{current_user.livesin.name}}</h4>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <form action="" method="post" enctype="multipart/form-data">
+                {{form.hidden_tag()}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 text-center">Update Account</legend>
+                    <div class="form-group">
+                        {{form.username.label(class="form-control-label")}}
+                        {% if form.username.errors %}
+                            {{form.username(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.username(class="form-control form-control-lg", placeholder="Username")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{form.name.label(class="form-control-label")}}
+                        {% if form.name.errors %}
+                            {{form.name(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.name(class="form-control form-control-lg", placeholder="Name")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{form.email.label(class="form-control-label")}}
+                        {% if form.email.errors %}
+                            {{form.email(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.email(class="form-control form-control-lg", placeholder="Email")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group picform">
+                        {{form.picture.label()}}
+                        {{form.picture(class="form-control-file")}}
+                        {% if form.picture.errors %}
+                                {% for error in form.picture.errors %}
+                                    <span class="text-danger">{{error}}</span></br>
+                                {% endfor %}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-outline-info")}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+</div>
 {% endblock content %}

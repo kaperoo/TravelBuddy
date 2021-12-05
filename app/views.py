@@ -1,6 +1,8 @@
+import secrets, os
+from PIL import Image
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db, models, admin, bcrypt
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, UpdateAccountForm
 
 from datetime import datetime, timedelta, date
 from flask_admin.contrib.sqla import ModelView 
@@ -29,10 +31,12 @@ def country(country):
 
     c = Country.query.filter_by(name=country).first()
 
+    imageFile = url_for('static', filename='flags/' + c.name + '.png')
     #   render the country page
     return render_template('country.html',
                             title=c.name,
-                            c=c)
+                            c=c,
+                            imageFile=imageFile)
 
 #   A page where the user can register
 @app.route('/register', methods=['GET', 'POST'])
@@ -81,8 +85,47 @@ def logout():
     logout_user()
     return redirect('/')
 
-@app.route('/account')
+def savePicture(formPicture):
+    randomHex = secrets.token_hex(8)
+    _, fExt = os.path.splitext(formPicture.filename)
+    pictureName = randomHex + fExt
+    picturePath = os.path.join(app.root_path, 'static/profilepics', pictureName)
+    
+    outputSize = (125, 125)
+    i = Image.open(formPicture)
+    i.thumbnail(outputSize)
+    i.save(picturePath)
+    
+    prevPicture = os.path.join(app.root_path, 'static/profilepics', current_user.profilePicture)
+    if os.path.exists(prevPicture):
+        os.remove(prevPicture)
+
+    return pictureName    
+
+@app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+
+        if form.picture.data:
+            pictureFile = savePicture(form.picture.data)
+            current_user.profilePicture = pictureFile
+
+        current_user.username = form.username.data
+        current_user.name = form.name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect('/account')
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.name.data = current_user.name
+        form.email.data = current_user.email
+
+    imageFile = url_for('static', filename='profilepics/' + current_user.profilePicture)
     return render_template('account.html',
-                           title='Your Account')
+                           title='Your Account',
+                           imageFile=imageFile,
+                           form=form)

@@ -51,7 +51,5 @@ class Country(db.Model):
     language = db.Column(db.String(120), nullable=False)
     #   Currency of this country
     currency = db.Column(db.String(20), nullable=False)
-    #   Flag of this country
-    flag = db.Column(db.String(20), nullable=False, default='defaultc.jpg')
 
     citizens = db.relationship('User', backref='livesin', lazy='dynamic')

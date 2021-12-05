@@ -6,15 +6,16 @@ body{
     background-color: #0a2d3b;
     color: white;
     padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 20px;
 }
 .form-check-label{
     font-size: medium;
-    
 }
 nav, footer{
     background-color: #01171b;
 }
-input, textarea{
+input{
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: larger;
     border-style: solid;
@@ -56,4 +57,69 @@ input::placeholder, textarea::placeholder{
     margin-right: auto; 
     box-shadow: 0px 0px 10px #0a2d3b;
     width: 90%;
+}
+.accinfo, .ctry{
+    background-color: #0a2d3b;
+    color: white;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.flaga{
+    box-shadow: 5px 5px 10px #061e27;
+}
+.visp{
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #72c376;
+}
+.nvisp{
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #72c376;
+}
+.vis{
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #72c3766b;
+}
+.fvisp{
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #e4dc71;
+}
+.nfvisp{
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #e4dc71;
+}
+.fvis{
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #e4dc7148;
+}
+.livp{
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #c367cf;
+}
+.nlivp{
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #c367cf;
+}
+.liv{
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #c367cf59;
 }

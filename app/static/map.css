@@ -1,5 +1,5 @@
 body{
-    overflow: hidden !important;
+    /* overflow: hidden !important; */
     color: white;
 }
 .row{
@@ -12,6 +12,7 @@ body{
     overflow: auto;
 }
 .crow{
+    border-radius: 2px;
     background-color: #0a525f;
     margin: 5px; 
     padding: 3px;

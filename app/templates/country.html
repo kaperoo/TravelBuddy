@@ -4,30 +4,109 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="../static/map.css" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../static/map.js"></script>
+        <script src="../static/scripts/distance.js"></script>
+        <script src="../static/scripts/list.js"></script>
     </head>
     <body>
 
-<div class="container-fluid">
+<div class="container ctry">
     <div class="row justify-content-center">
-        <span><b>COUNTRY FLAG</b></span>
+        <img src="{{imageFile}}" alt="{{c.name}} flag" class="img-fluid mb-4 flaga"></img>
     </div>
     <div class="row justify-content-center">
-        <span><b>{{c.name}}</b></span>
+        <h1><b>{{c.name}}</b></h1>
     </div>
     <div class="row justify-content-center">
-        <span><b>Capital: {{c.capital}}</b></span>
+        <h3>Capital: {{c.capital}}</h3>    
     </div>
     <div class="row justify-content-center">
-        <span><b>Language: {{c.language}}</b></span>
+        <h4 class="text-secondary"><em>Language: {{c.language}} / Currency: {{c.currency}}</em></h4>
     </div>
+
+    {% if current_user.is_authenticated %}
+    <div class="row justify-content-center mt-5">
+        
+        {% if current_user in c.visitors %}
+        <div class="col-md-3 col-sm-12 visp mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>Visited</h4>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-3 col-sm-12 nvisp mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>Mark as Visited</h4>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if current_user in c.futureVisitors %}
+        <div class="col-md-3 col-sm-12 fvisp offset-md-1 mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>On Bucket List</h4>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-3 col-sm-12 nfvisp offset-md-1 mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>Add to Bucket List</h4>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if current_user in c.citizens %}
+        <div class="col-md-3 col-sm-12 livp offset-md-1 mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>You Live Here</h4>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-3 col-sm-12 nlivp offset-md-1 mb-1">
+            <div class="row pl-2 pt-1">
+                <h4>Mark as Home</h4>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
     <div class="row justify-content-center">
-        <span><b>Currency: {{c.currency}}</b></span>
+        <div class="col-md-3 col-sm-12 mb-5">
+            <div class="row pl-2 visp pt-1">
+                <h4>Visited by:</h4>
+            </div>
+            {% for v in c.visitors %}
+            <div class="row vis pl-2 pt-1">
+                <h4>@{{v.username}}</h4>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5">
+            <div class="row pl-2 pt-1 fvisp">
+                <h4> Want to visit:</h4>
+            </div>
+            {% for fv in c.futureVisitors %}
+            <div class="row fvis pl-2 pt-1">
+                <h4>@{{fv.username}}</h4>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5">
+            <div class="row pl-2 livp pt-1">
+                <h4>Lives here:</h4>
+            </div>
+            {% for l in c.citizens %}
+            <div class="row liv pl-2 pt-1">
+                <h4>@{{l.username}}</h4>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-
+<div class="row">
+</div>
     </body>
 </html>
 
