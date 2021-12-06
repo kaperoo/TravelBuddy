@@ -34,7 +34,7 @@
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nvisp mb-1">
+        <div class="col-md-3 col-sm-12 nvisited mb-1">
             <div class="row pl-2 pt-1">
                 <h4>Mark as Visited</h4>
             </div>
@@ -42,13 +42,13 @@
         {% endif %}
 
         {% if current_user in c.futureVisitors %}
-        <div class="col-md-3 col-sm-12 fvisp offset-md-1 mb-1">
+        <div class="col-md-3 col-sm-12 bucketlist offset-md-1 mb-1">
             <div class="row pl-2 pt-1">
                 <h4>On Bucket List</h4>
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nfvisp offset-md-1 mb-1">
+        <div class="col-md-3 col-sm-12 nbucketlist offset-md-1 mb-1">
             <div class="row pl-2 pt-1">
                 <h4>Add to Bucket List</h4>
             </div>
@@ -56,13 +56,13 @@
         {% endif %}
 
         {% if current_user in c.citizens %}
-        <div class="col-md-3 col-sm-12 livp offset-md-1 mb-1">
+        <div class="col-md-3 col-sm-12 living offset-md-1 mb-1">
             <div class="row pl-2 pt-1">
-                <h4>You Live Here</h4>
+                <h4>You Live Here</h4><i class="fas fa-times"></i>
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nlivp offset-md-1 mb-1">
+        <div class="col-md-3 col-sm-12 nliving offset-md-1 mb-1">
             <div class="row pl-2 pt-1">
                 <h4>Mark as Home</h4>
             </div>

@@ -136,6 +136,7 @@ input::placeholder, textarea::placeholder{
     cursor: pointer;
 }
 .visited{
+    cursor: pointer;
     margin-top: 10px;
     color: black;
     font-weight: bold;
@@ -147,4 +148,68 @@ input::placeholder, textarea::placeholder{
 .visited:hover{
     background-color: #72c376a8;
     color: white;
+}
+.nvisited{
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: solid;
+    border-color: #72c376;
+}
+.nvisited:hover{
+    background-color: #72c376;
+    color: black;
+}
+.bucketlist{
+    cursor: pointer;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #e4dc71;
+    border: solid;
+    border-color: #e4dc71;
+}
+.bucketlist:hover{
+    background-color: #e4dc71a4;
+    color: white;
+}
+.nbucketlist{
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: solid;
+    border-color: #e4dc71;
+}
+.nbucketlist:hover{
+    background-color: #e4dc71;
+    color: black;
+}
+.living{
+    cursor: pointer;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #c367cf;
+    border: solid;
+    border-color: #c367cf;
+}
+.living:hover{
+    background-color: #c367cf59;
+    color: white;
+}
+.nliving{
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: solid;
+    border-color: #c367cf;
+}
+.nliving:hover{
+    background-color: #c367cf;
+    color: black;
 }

@@ -4,7 +4,6 @@ from flask import render_template, flash, redirect, request, url_for
 from app import app, db, models, admin, bcrypt
 from .forms import RegistrationForm, LoginForm, UpdateAccountForm, ChangePasswordForm
 
-from datetime import datetime, timedelta, date
 from flask_admin.contrib.sqla import ModelView 
 from flask_login import login_user, current_user, logout_user, login_required
 from .models import User, Country
@@ -91,17 +90,19 @@ def savePicture(formPicture):
     pictureName = randomHex + fExt
     picturePath = os.path.join(app.root_path, 'static/profilepics', pictureName)
     
-    outputSize = (125, 125)
+    outputSize = (250, 250)
     i = Image.open(formPicture)
     i.thumbnail(outputSize)
     i.save(picturePath)
     
-    prevPicture = os.path.join(app.root_path, 'static/profilepics', current_user.profilePicture)
-    if os.path.exists(prevPicture):
-        os.remove(prevPicture)
+    if current_user.profilePicture != 'default.jpg':
+        prevPicture = os.path.join(app.root_path, 'static/profilepics', current_user.profilePicture)
+        if os.path.exists(prevPicture):
+            os.remove(prevPicture)
 
     return pictureName    
 
+#   A page where the user can update their profile
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
