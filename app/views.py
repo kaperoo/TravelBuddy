@@ -2,7 +2,7 @@ import secrets, os
 from PIL import Image
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db, models, admin, bcrypt
-from .forms import RegistrationForm, LoginForm, UpdateAccountForm
+from .forms import RegistrationForm, LoginForm, UpdateAccountForm, ChangePasswordForm
 
 from datetime import datetime, timedelta, date
 from flask_admin.contrib.sqla import ModelView 
@@ -107,8 +107,10 @@ def savePicture(formPicture):
 def account():
 
     form = UpdateAccountForm()
-    if form.validate_on_submit():
+    passForm = ChangePasswordForm()
 
+    #   if the update profile form is submitted
+    if form.validate_on_submit():
         if form.picture.data:
             pictureFile = savePicture(form.picture.data)
             current_user.profilePicture = pictureFile
@@ -123,9 +125,40 @@ def account():
         form.username.data = current_user.username
         form.name.data = current_user.name
         form.email.data = current_user.email
+    
+    #   Password change
+    if passForm.validate_on_submit():
+        if bcrypt.check_password_hash(current_user.password, passForm.oldPassword.data):
+            if passForm.newPassword.data == passForm.confirmPassword.data:
+                hashed_password = bcrypt.generate_password_hash(passForm.newPassword.data).decode('utf-8')
+                current_user.password = hashed_password
+                db.session.commit()
+                flash('Your password has been updated!', 'success')
+                return redirect('/account')
+            else:
+                flash('The passwords do not match!', 'danger')
+        else:
+            flash('The old password is incorrect!', 'danger')
 
     imageFile = url_for('static', filename='profilepics/' + current_user.profilePicture)
     return render_template('account.html',
                            title='Your Account',
                            imageFile=imageFile,
-                           form=form)
+                           form=form,
+                           passForm=passForm)
+
+#   A users profile page
+@app.route('/profile/<username>', methods=['GET', 'POST'])
+def profile(username):
+
+    u = User.query.filter_by(username=username).first()
+
+    if u == current_user:
+        return redirect('/account')
+
+    imageFile = url_for('static', filename='profilepics/' + u.profilePicture)
+    #   render the profile page
+    return render_template('profile.html',
+                            title=u.username,
+                            u=u,
+                            imageFile=imageFile)

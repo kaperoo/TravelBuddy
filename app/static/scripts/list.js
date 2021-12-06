@@ -1,21 +1,20 @@
 $(document).ready(function() {
 
-    $(".crow").hover(function() {
-        var classname = $(this).attr('id');
-
-        $("svg path[name=\"" + classname + "\"]").css({
-            fill: "#dfbd69",
-            transition: "0.6s"
-        });
+    $(".user").click(function() {
+        var username = $(this).attr('id');
+        window.location = "/profile/" + username;
     });
-    $(".crow").mouseleave(function() {
-        var classname = $(this).attr('id');
-
-        $("svg path[name=\"" + classname + "\"]").css("fill", "#0a2d3b");
+    $(".place").click(function() {
+        var country = $(this).attr('id');
+        window.location = "/country/" + country;
     });
-    $(".crow").click(function() {
-        var classname = $(this).attr('id');
 
-        window.location = "/country/" + classname;
-    });
+    // $(".visited").hover(function() {
+    //     $(this).css({"margin-top": "10px",
+    //         "border-style": "solid",
+    //         "border-radius": "5px",
+    //         "border-color": "#72c376",
+    //         "background-color": "transparent",
+    //         "color": "white",});
+    // });
 });

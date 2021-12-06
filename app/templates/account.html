@@ -111,6 +111,60 @@
             </form>
         </div>
     </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <form action="" method="post" enctype="multipart/form-data">
+                {{passForm.hidden_tag()}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 text-center">Change Password</legend>
+                    <div class="form-group">
+                        {{passForm.oldPassword.label(class="form-control-label")}}
+                        {% if passForm.oldPassword.errors %}
+                            {{passForm.oldPassword(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in passForm.oldPassword.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{passForm.oldPassword(class="form-control form-control-lg", placeholder="Old Password")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{passForm.newPassword.label(class="form-control-label")}}
+                        {% if passForm.newPassword.errors %}
+                            {{passForm.newPassword(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in passForm.newPassword.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{passForm.newPassword(class="form-control form-control-lg", placeholder="New Password")}}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{passForm.confirmPassword.label(class="form-control-label")}}
+                        {% if passForm.confirmPassword.errors %}
+                            {{passForm.confirmPassword(class="form-control is-invalid form-control-lg")}}
+                            <div class="invalid-feedback">
+                                {% for error in passForm.confirmPassword.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{passForm.confirmPassword(class="form-control form-control-lg", placeholder="Confirm Password")}}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{passForm.submit(class="btn btn-outline-info",id="passbtn")}}
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
 <div class="row">
 </div>

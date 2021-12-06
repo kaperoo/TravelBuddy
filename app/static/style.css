@@ -123,3 +123,28 @@ input::placeholder, textarea::placeholder{
     border-radius: 5px;
     background-color: #c367cf59;
 }
+.rgreen:hover{
+    background-color: #72c376a8;
+}
+.ryellow:hover{
+    background-color: #e4dc71a4;
+}
+.rpurple:hover{
+    background-color: #c367cfb2;
+}
+.rgreen, .ryellow, .rpurple{
+    cursor: pointer;
+}
+.visited{
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #72c376;
+    border: solid;
+    border-color: #72c376;
+}
+.visited:hover{
+    background-color: #72c376a8;
+    color: white;
+}

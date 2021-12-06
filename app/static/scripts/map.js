@@ -23,6 +23,8 @@ $(document).ready(function() {
         var name = $(this).attr('name');
 
         // name = name.split(" ");
+        row = document.getElementById(name);
+        row.scrollIntoView();
 
         $(".crow[id=\""+name+"\"]").css({
             "background-color": "#dfbd69",

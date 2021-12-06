@@ -28,8 +28,8 @@
     <div class="row justify-content-center mt-5">
         
         {% if current_user in c.visitors %}
-        <div class="col-md-3 col-sm-12 visp mb-1">
-            <div class="row pl-2 pt-1">
+        <div class="col-md-3 col-sm-12 mb-1">
+            <div class="row pl-2 pt-1 visited">
                 <h4>Visited</h4>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 <h4>Visited by:</h4>
             </div>
             {% for v in c.visitors %}
-            <div class="row vis pl-2 pt-1">
+            <div class="row vis pl-2 pt-1 rgreen user" id="{{v.username}}">
                 <h4>@{{v.username}}</h4>
             </div>
             {% endfor %}
@@ -88,7 +88,7 @@
                 <h4> Want to visit:</h4>
             </div>
             {% for fv in c.futureVisitors %}
-            <div class="row fvis pl-2 pt-1">
+            <div class="row fvis pl-2 pt-1 ryellow user" id="{{fv.username}}">
                 <h4>@{{fv.username}}</h4>
             </div>
             {% endfor %}
@@ -98,7 +98,7 @@
                 <h4>Lives here:</h4>
             </div>
             {% for l in c.citizens %}
-            <div class="row liv pl-2 pt-1">
+            <div class="row liv pl-2 pt-1 rpurple user" id="{{l.username}}">
                 <h4>@{{l.username}}</h4>
             </div>
             {% endfor %}

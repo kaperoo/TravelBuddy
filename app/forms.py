@@ -77,3 +77,17 @@ class UpdateAccountForm(Form):
 			user = User.query.filter_by(email=email.data).first()
 			if user:
 				raise ValidationError('Email already in use')
+
+class ChangePasswordForm(Form):
+
+
+	oldPassword = PasswordField('Old Password',
+								validators=[DataRequired()])
+
+	newPassword = PasswordField('New Password',
+								validators=[DataRequired()])
+
+	confirmPassword = PasswordField('Confirm Password',
+										validators=[DataRequired(),
+										EqualTo('newPassword',message='Passwords must match')])
+	submit = SubmitField('Change Password')
