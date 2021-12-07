@@ -1,24 +1,2 @@
-[2021-12-07 21:24:04,981] INFO: * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:24:23,586] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "GET /country/Iceland HTTP/1.1" 200 -
-[2021-12-07 21:24:23,621] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/scripts/cookies.js HTTP/1.1[0m" 304 -
-[2021-12-07 21:24:23,622] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
-[2021-12-07 21:24:23,642] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/scripts/distance.js HTTP/1.1[0m" 304 -
-[2021-12-07 21:24:23,647] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/scripts/list.js HTTP/1.1[0m" 304 -
-[2021-12-07 21:24:23,652] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
-[2021-12-07 21:24:23,656] INFO:127.0.0.1 - - [07/Dec/2021 21:24:23] "[36mGET /static/flags/Iceland.png HTTP/1.1[0m" 304 -
-[2021-12-07 21:32:15,189] INFO: * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:32:53,343] INFO:  * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:32:58,002] INFO:  * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:33:02,619] INFO:  * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:33:10,553] INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-[2021-12-07 21:33:10,553] INFO:  * Restarting with stat
-[2021-12-07 21:33:20,184] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "GET / HTTP/1.1" 200 -
-[2021-12-07 21:33:20,214] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
-[2021-12-07 21:33:20,218] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "[36mGET /static/scripts/cookies.js HTTP/1.1[0m" 304 -
-[2021-12-07 21:33:20,247] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "[36mGET /static/map.css HTTP/1.1[0m" 304 -
-[2021-12-07 21:33:20,251] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "[36mGET /static/scripts/map.js HTTP/1.1[0m" 304 -
-[2021-12-07 21:33:20,255] INFO: 127.0.0.1 - - [07/Dec/2021 21:33:20] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
-[2021-12-07 21:33:45,450] INFO:  * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:33:45,553] INFO:  * Restarting with stat
-[2021-12-07 21:33:50,094] INFO:  * Detected change in '/home/kacperroemer/Code/COMP2011/travelBuddy/app/__init__.py', reloading
-[2021-12-07 21:33:50,188] INFO:  * Restarting with stat
+[2021-12-07 22:00:23,081] INFO: app: kaperoo logged in
+[2021-12-07 22:00:32,338] INFO: app: kaperoo logged out
