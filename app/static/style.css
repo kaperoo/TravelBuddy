@@ -202,6 +202,10 @@ input::placeholder, textarea::placeholder{
     border-color: #c367cf;
 }
 .cols{
-    max-height: 400px;
+    max-height: 420px;
     overflow: auto;
+}
+#travelbuddy{
+    width: 250px;
+    box-shadow: 5px 5px 10px #061e27;
 }

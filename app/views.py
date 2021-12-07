@@ -221,3 +221,7 @@ def ctryrmv():
         db.session.commit()
 
     return json.dumps({'status': 'OK', 'response': response, 'col':col})
+
+@app.route('/about')
+def about():
+    return render_template('about.html', title='About')
