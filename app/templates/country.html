@@ -15,7 +15,7 @@
         <img src="{{imageFile}}" alt="{{c.name}} flag" class="img-fluid mb-4 flaga"></img>
     </div>
     <div class="row justify-content-center">
-        <h1><b>{{c.name}}</b></h1>
+        <h1 id="countryName"><b>{{c.name}}</b></h1>
     </div>
     <div class="row justify-content-center">
         <h3>Capital: {{c.capital}}</h3>    
@@ -28,43 +28,43 @@
     <div class="row justify-content-center mt-5">
         
         {% if current_user in c.visitors %}
-        <div class="col-md-3 col-sm-12 mb-1">
-            <div class="row pl-2 pt-1 visited">
-                <h4>Visited</h4>
+        <div class="col-md-3 col-sm-12 mb-1 dbb" id="v1">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Visited</h4><i class="ivis fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nvisited mb-1">
-            <div class="row pl-2 pt-1">
-                <h4>Mark as Visited</h4>
+        <div class="col-md-3 col-sm-12 mb-1 dbb" id="v2">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Mark as Visited</h4>
             </div>
         </div>
         {% endif %}
 
         {% if current_user in c.futureVisitors %}
-        <div class="col-md-3 col-sm-12 bucketlist offset-md-1 mb-1">
-            <div class="row pl-2 pt-1">
-                <h4>On Bucket List</h4>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="b1">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
+                <h4 class="mb-0 pl-2">On Bucket List</h4><i class="ibuc fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nbucketlist offset-md-1 mb-1">
-            <div class="row pl-2 pt-1">
-                <h4>Add to Bucket List</h4>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="b2">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Add to Bucket List</h4>
             </div>
         </div>
         {% endif %}
 
         {% if current_user in c.citizens %}
-        <div class="col-md-3 col-sm-12 living offset-md-1 mb-1">
-            <div class="row pl-2 pt-1">
-                <h4>You Live Here</h4><i class="fas fa-times"></i>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="l1">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
+                <h4 class="mb-0 pl-2">You Live Here</h4><i class="iliv fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
-        <div class="col-md-3 col-sm-12 nliving offset-md-1 mb-1">
-            <div class="row pl-2 pt-1">
-                <h4>Mark as Home</h4>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="l2">
+            <div class="row h-100 d-flex flex-row align-items-center justify-content-between  pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Mark as Home</h4>
             </div>
         </div>
         {% endif %}
@@ -73,9 +73,9 @@
     {% endif %}
 
     <div class="row justify-content-center">
-        <div class="col-md-3 col-sm-12 mb-5">
-            <div class="row pl-2 visp pt-1">
-                <h4>Visited by:</h4>
+        <div class="col-md-3 col-sm-12 mb-5 cols">
+            <div class="row visp d-flex flex-row align-items-center pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Visited by:</h4>
             </div>
             {% for v in c.visitors %}
             <div class="row vis pl-2 pt-1 rgreen user" id="{{v.username}}">
@@ -83,9 +83,9 @@
             </div>
             {% endfor %}
         </div>
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-5">
-            <div class="row pl-2 pt-1 fvisp">
-                <h4> Want to visit:</h4>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols">
+            <div class="row d-flex flex-row align-items-center pt-1 pb-1 fvisp">
+                <h4 class="mb-0 pl-2"> Want to visit:</h4>
             </div>
             {% for fv in c.futureVisitors %}
             <div class="row fvis pl-2 pt-1 ryellow user" id="{{fv.username}}">
@@ -93,9 +93,9 @@
             </div>
             {% endfor %}
         </div>
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-5">
-            <div class="row pl-2 livp pt-1">
-                <h4>Lives here:</h4>
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols">
+            <div class="row livp d-flex flex-row align-items-center pt-1 pb-1">
+                <h4 class="mb-0 pl-2">Lives here:</h4>
             </div>
             {% for l in c.citizens %}
             <div class="row liv pl-2 pt-1 rpurple user" id="{{l.username}}">

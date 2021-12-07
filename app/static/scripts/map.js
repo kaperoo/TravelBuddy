@@ -6,7 +6,7 @@ $(document).ready(function() {
         $("svg path[name=\"" + classname + "\"]").css({
             fill: "#dfbd69",
             transition: "0.6s"
-        });
+        },);
     });
     $(".crow").mouseleave(function() {
         var classname = $(this).attr('id');

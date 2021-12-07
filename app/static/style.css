@@ -135,7 +135,7 @@ input::placeholder, textarea::placeholder{
 .rgreen, .ryellow, .rpurple{
     cursor: pointer;
 }
-.visited{
+#v1{
     cursor: pointer;
     margin-top: 10px;
     color: black;
@@ -145,11 +145,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #72c376;
 }
-.visited:hover{
+#v1:hover{
     background-color: #72c376a8;
     color: white;
 }
-.nvisited{
+#v2{
     cursor: pointer;
     margin-top: 10px;
     font-weight: bold;
@@ -157,11 +157,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #72c376;
 }
-.nvisited:hover{
+#v2:hover{
     background-color: #72c376;
     color: black;
 }
-.bucketlist{
+#b1{
     cursor: pointer;
     margin-top: 10px;
     color: black;
@@ -171,11 +171,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #e4dc71;
 }
-.bucketlist:hover{
+#b1:hover{
     background-color: #e4dc71a4;
     color: white;
 }
-.nbucketlist{
+#b2{
     cursor: pointer;
     margin-top: 10px;
     font-weight: bold;
@@ -183,11 +183,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #e4dc71;
 }
-.nbucketlist:hover{
+#b2:hover{
     background-color: #e4dc71;
     color: black;
 }
-.living{
+#l1{
     cursor: pointer;
     margin-top: 10px;
     color: black;
@@ -197,11 +197,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #c367cf;
 }
-.living:hover{
+#l1:hover{
     background-color: #c367cf59;
     color: white;
 }
-.nliving{
+#l2{
     cursor: pointer;
     margin-top: 10px;
     font-weight: bold;
@@ -209,7 +209,11 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #c367cf;
 }
-.nliving:hover{
+#l2:hover{
     background-color: #c367cf;
     color: black;
+}
+.cols{
+    max-height: 400px;
+    overflow: auto;
 }

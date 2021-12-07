@@ -1,12 +1,14 @@
 import secrets, os
 from PIL import Image
 from flask import render_template, flash, redirect, request, url_for
+from werkzeug.wrappers import ResponseStreamMixin
 from app import app, db, models, admin, bcrypt
 from .forms import RegistrationForm, LoginForm, UpdateAccountForm, ChangePasswordForm
 
 from flask_admin.contrib.sqla import ModelView 
 from flask_login import login_user, current_user, logout_user, login_required
 from .models import User, Country
+import json
 
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Country, db.session))
@@ -163,3 +165,30 @@ def profile(username):
                             title=u.username,
                             u=u,
                             imageFile=imageFile)
+
+@app.route('/respond', methods=['POST'])
+def respond():
+    # Parse the JSON data included in the request
+    data = json.loads(request.data)
+    response = data.get('response')
+    ctry = data.get('country')
+
+    currCountry = Country.query.filter_by(name=ctry).first()
+
+    if current_user.is_authenticated:
+        if response == 'v1':
+            current_user.visitedCountries.remove(currCountry)
+        elif response == 'v2':
+            current_user.visitedCountries.append(currCountry)
+        elif response == 'b1':
+            current_user.bucketList.remove(currCountry)
+        elif response == 'b2':
+            current_user.bucketList.append(currCountry)
+        elif response == 'l1':
+            currCountry.citizens.remove(current_user)
+        elif response == 'l2':
+            currCountry.citizens.append(current_user)
+
+        db.session.commit()
+
+    return json.dumps({'status': 'OK', 'response': response, 'ctry':ctry})
