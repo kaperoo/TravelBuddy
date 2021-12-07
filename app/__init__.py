@@ -4,6 +4,9 @@ from flask_migrate import Migrate
 from flask_admin import Admin, AdminIndexView
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, current_user
+import logging
+
+logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', filename='logfile.log', filemode='a', level=logging.DEBUG)
 
 app = Flask(__name__)
 app.config.from_object('config')

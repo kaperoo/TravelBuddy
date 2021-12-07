@@ -16,11 +16,10 @@ admin.add_view(ModelView(Country, db.session))
 #   Main page/page with all assignments
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
-    # countries = Country.query.all()
-
-    countries = Country.query.order_by(models.Country.name).all()
-
+    try:
+        countries = Country.query.order_by(models.Country.name).all()
+    except Exception as e:
+        app.logger.error("Route / failed to execute error= %s",e)
     #   render the main page
     return render_template('index.html',
                            title='Travel Buddy',
@@ -30,9 +29,13 @@ def index():
 @app.route('/country/<country>', methods=['GET', 'POST'])
 def country(country):
 
-    c = Country.query.filter_by(name=country).first()
+    try:
+        c = Country.query.filter_by(name=country).first()
 
-    imageFile = url_for('static', filename='flags/' + c.name + '.png')
+        imageFile = url_for('static', filename='flags/' + c.name + '.png')
+    except Exception as e:
+        app.logger.error('Route /country failed to execute error= %s',e)
+    
     #   render the country page
     return render_template('country.html',
                             title=c.name,
@@ -42,18 +45,22 @@ def country(country):
 #   A page where the user can register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated:
-        return redirect('/')
-    #   create an instance of the form from forms.py file
-    form = RegistrationForm()
+    try:
+        if current_user.is_authenticated:
+            return redirect('/')
+        #   create an instance of the form from forms.py file
+        form = RegistrationForm()
 
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, name=form.name.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created! You can now sign in'.format(form.username.data), 'success')
-        return redirect('/login')
+        if form.validate_on_submit():
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(username=form.username.data, name=form.name.data, email=form.email.data, password=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+            flash('Your account has been created! You can now sign in'.format(form.username.data), 'success')
+            app.logger.info('User {} has been created'.format(form.username.data))
+            return redirect('/login')
+    except Exception as e:
+        app.logger.error('Route /register failed to execute error= %s',e)
 
     return render_template('register.html',
                            title='Register',
@@ -62,20 +69,26 @@ def register():
 #   A page where the user can login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect('/')
-    #   create an instance of the form from forms.py file
-    form = LoginForm()
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            flash('You have been logged in!', 'success')
-            return redirect(next_page) if next_page else redirect('/')
-        else:    
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+    try:
+        if current_user.is_authenticated:
+            return redirect('/')
+        #   create an instance of the form from forms.py file
+        form = LoginForm()
+
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=form.remember.data)
+                app.logger.info('%s logged in', user.username)
+                next_page = request.args.get('next')
+                flash('You have been logged in!', 'success')
+                return redirect(next_page) if next_page else redirect('/')
+            else:    
+                app.logger.info('%s (email) failed to login',form.email.data)
+                flash('Login Unsuccessful. Please check email and password', 'danger')
+    except Exception as e:
+        app.logger.error('Route "/login" failed to execute error="%s"',e)
 
     return render_template('login.html',
                            title='Login',
@@ -83,7 +96,9 @@ def login():
 
 @app.route('/logout')
 def logout():
+    app.logger.info('%s logged out', current_user.username)
     logout_user()
+    flash('You have been logged out!', 'success')
     return redirect('/')
 
 def savePicture(formPicture):
@@ -117,41 +132,47 @@ def savePicture(formPicture):
 @login_required
 def account():
 
-    form = UpdateAccountForm()
-    passForm = ChangePasswordForm()
+    try:
+        form = UpdateAccountForm()
+        passForm = ChangePasswordForm()
 
-    #   if the update profile form is submitted
-    if form.validate_on_submit():
-        if form.picture.data:
-            pictureFile = savePicture(form.picture.data)
-            current_user.profilePicture = pictureFile
+        #   if the update profile form is submitted
+        if form.validate_on_submit():
+            if form.picture.data:
+                pictureFile = savePicture(form.picture.data)
+                current_user.profilePicture = pictureFile
 
-        current_user.username = form.username.data
-        current_user.name = form.name.data
-        current_user.email = form.email.data
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect('/account')
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.name.data = current_user.name
-        form.email.data = current_user.email
-    
-    #   Password change
-    if passForm.validate_on_submit():
-        if bcrypt.check_password_hash(current_user.password, passForm.oldPassword.data):
-            if passForm.newPassword.data == passForm.confirmPassword.data:
-                hashed_password = bcrypt.generate_password_hash(passForm.newPassword.data).decode('utf-8')
-                current_user.password = hashed_password
-                db.session.commit()
-                flash('Your password has been updated!', 'success')
-                return redirect('/account')
+            current_user.username = form.username.data
+            current_user.name = form.name.data
+            current_user.email = form.email.data
+            db.session.commit()
+            app.logger.info('%s updated their profile', current_user.username)
+            flash('Your account has been updated!', 'success')
+            return redirect('/account')
+        elif request.method == 'GET':
+            form.username.data = current_user.username
+            form.name.data = current_user.name
+            form.email.data = current_user.email
+        
+        #   Password change
+        if passForm.validate_on_submit():
+            if bcrypt.check_password_hash(current_user.password, passForm.oldPassword.data):
+                if passForm.newPassword.data == passForm.confirmPassword.data:
+                    hashed_password = bcrypt.generate_password_hash(passForm.newPassword.data).decode('utf-8')
+                    current_user.password = hashed_password
+                    db.session.commit()
+                    app.logger.info('%s changed their password', current_user.username)
+                    flash('Your password has been updated!', 'success')
+                    return redirect('/account')
+                else:
+                    flash('The passwords do not match!', 'danger')
             else:
-                flash('The passwords do not match!', 'danger')
-        else:
-            flash('The old password is incorrect!', 'danger')
+                flash('The old password is incorrect!', 'danger')
 
-    imageFile = url_for('static', filename='profilepics/' + current_user.profilePicture)
+        imageFile = url_for('static', filename='profilepics/' + current_user.profilePicture)
+    except Exception as e:
+        app.logger.error('Route "/account" failed to execute error="%s"',e)
+    
     return render_template('account.html',
                            title='Your Account',
                            imageFile=imageFile,
@@ -162,12 +183,16 @@ def account():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 def profile(username):
 
-    u = User.query.filter_by(username=username).first()
+    try:
+        u = User.query.filter_by(username=username).first()
 
-    if u == current_user:
-        return redirect('/account')
+        if u == current_user:
+            return redirect('/account')
 
-    imageFile = url_for('static', filename='profilepics/' + u.profilePicture)
+        imageFile = url_for('static', filename='profilepics/' + u.profilePicture)
+    except Exception as e:
+        app.logger.error('Route "/profile/<username>" failed to execute error="%s"',e)
+    
     #   render the profile page
     return render_template('profile.html',
                             title=u.username,
@@ -176,49 +201,67 @@ def profile(username):
 
 @app.route('/respond', methods=['POST'])
 def respond():
-    # Parse the JSON data included in the request
-    data = json.loads(request.data)
-    response = data.get('response')
-    ctry = data.get('country')
 
-    currCountry = Country.query.filter_by(name=ctry).first()
+    try:
+        # Parse the JSON data included in the request
+        data = json.loads(request.data)
+        response = data.get('response')
+        ctry = data.get('country')
 
-    if current_user.is_authenticated:
-        if response == 'v1' and currCountry in current_user.visitedCountries:
-            current_user.visitedCountries.remove(currCountry)
-        elif response == 'v2' and currCountry not in current_user.visitedCountries:
-            current_user.visitedCountries.append(currCountry)
-        elif response == 'b1' and currCountry in current_user.bucketList:
-            current_user.bucketList.remove(currCountry)
-        elif response == 'b2' and currCountry not in current_user.bucketList:
-            current_user.bucketList.append(currCountry)
-        elif response == 'l1' and current_user in currCountry.citizens:
-            currCountry.citizens.remove(current_user)
-        elif response == 'l2' and current_user not in currCountry.citizens:
-            currCountry.citizens.append(current_user)
+        currCountry = Country.query.filter_by(name=ctry).first()
 
-        db.session.commit()
+        if current_user.is_authenticated:
+            if response == 'v1' and currCountry in current_user.visitedCountries:
+                current_user.visitedCountries.remove(currCountry)
+                app.logger.info('%s removed %s from their visited countries', current_user.username, currCountry.name)
+            elif response == 'v2' and currCountry not in current_user.visitedCountries:
+                current_user.visitedCountries.append(currCountry)
+                app.logger.info('%s added %s to their visited countries', current_user.username, currCountry.name)
+            elif response == 'b1' and currCountry in current_user.bucketList:
+                current_user.bucketList.remove(currCountry)
+                app.logger.info('%s removed %s from their bucket list', current_user.username, currCountry.name)
+            elif response == 'b2' and currCountry not in current_user.bucketList:
+                current_user.bucketList.append(currCountry)
+                app.logger.info('%s added %s to their bucket list', current_user.username, currCountry.name)
+            elif response == 'l1' and current_user in currCountry.citizens:
+                currCountry.citizens.remove(current_user)
+                app.logger.info('%s removed his home country (%s)', current_user.username, currCountry.name)
+            elif response == 'l2' and current_user not in currCountry.citizens:
+                currCountry.citizens.append(current_user)
+                app.logger.info('%s added his home country (%s)', current_user.username, currCountry.name)
+
+            db.session.commit()
+    except Exception as e:
+        app.logger.error('Route "/respond" failed to execute error="%s"',e)
+        
+
 
     return json.dumps({'status': 'OK', 'response': response, 'ctry':ctry, 'username':current_user.username})
 
 @app.route('/ctryrmv', methods=['POST'])
 def ctryrmv():
-    # Parse the JSON data included in the request
-    data = json.loads(request.data)
-    response = data.get('response')
-    col = data.get('list')
+    try:
+        # Parse the JSON data included in the request
+        data = json.loads(request.data)
+        response = data.get('response')
+        col = data.get('list')
 
-    country = Country.query.filter_by(name=response).first()
+        country = Country.query.filter_by(name=response).first()
 
-    if current_user.is_authenticated:
-        if col == 'vs' and country in current_user.visitedCountries:
-            current_user.visitedCountries.remove(Country.query.filter_by(name=response).first())
-        elif col == 'bs' and country in current_user.bucketList:
-            current_user.bucketList.remove(Country.query.filter_by(name=response).first())
-        elif col == 'ls' and current_user in country.citizens:
-            Country.query.filter_by(name=response).first().citizens.remove(current_user)
+        if current_user.is_authenticated:
+            if col == 'vs' and country in current_user.visitedCountries:
+                current_user.visitedCountries.remove(Country.query.filter_by(name=response).first())
+                app.logger.info('%s removed %s from their bucket list', current_user.username, country.name)
+            elif col == 'bs' and country in current_user.bucketList:
+                current_user.bucketList.remove(Country.query.filter_by(name=response).first())
+                app.logger.info('%s removed %s from their bucket list', current_user.username, country.name)
+            elif col == 'ls' and current_user in country.citizens:
+                app.logger.info('%s removed his home country (%s)', current_user.username, country.name)
+                Country.query.filter_by(name=response).first().citizens.remove(current_user)
 
-        db.session.commit()
+            db.session.commit()
+    except Exception as e:
+        app.logger.error('Route "/ctryrmv" failed to execute error="%s"',e)
 
     return json.dumps({'status': 'OK', 'response': response, 'col':col})
 
