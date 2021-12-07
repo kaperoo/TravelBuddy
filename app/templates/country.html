@@ -21,11 +21,14 @@
         <h3>Capital: {{c.capital}}</h3>    
     </div>
     <div class="row justify-content-center">
-        <h4 class="text-secondary"><em>Language: {{c.language}} / Currency: {{c.currency}}</em></h4>
+        <h4 class="text-secondary"><em>Language: {{c.language}}</em></h4>
+    </div>
+    <div class="row justify-content-center mb-5">
+        <h4 class="text-secondary"><em>Currency: {{c.currency}}</em></h4>
     </div>
 
     {% if current_user.is_authenticated %}
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center">
         
         {% if current_user in c.visitors %}
         <div class="col-md-3 col-sm-12 mb-1 dbb" id="v1">
@@ -73,7 +76,7 @@
     {% endif %}
 
     <div class="row justify-content-center">
-        <div class="col-md-3 col-sm-12 mb-5 cols">
+        <div class="col-md-3 col-sm-12 mb-5 cols" id="vs">
             <div class="row visp d-flex flex-row align-items-center pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Visited by:</h4>
             </div>
@@ -83,7 +86,7 @@
             </div>
             {% endfor %}
         </div>
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols">
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols" id="bs">
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 fvisp">
                 <h4 class="mb-0 pl-2"> Want to visit:</h4>
             </div>
@@ -93,7 +96,7 @@
             </div>
             {% endfor %}
         </div>
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols">
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-5 cols" id="ls">
             <div class="row livp d-flex flex-row align-items-center pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Lives here:</h4>
             </div>

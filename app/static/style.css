@@ -145,8 +145,8 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #72c376;
 }
-#v1:hover{
-    background-color: #72c376a8;
+#v1:hover,#v2:hover{
+    background-color: #72c37680;
     color: white;
 }
 #v2{
@@ -156,10 +156,6 @@ input::placeholder, textarea::placeholder{
     border-radius: 5px;
     border: solid;
     border-color: #72c376;
-}
-#v2:hover{
-    background-color: #72c376;
-    color: black;
 }
 #b1{
     cursor: pointer;
@@ -171,7 +167,7 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #e4dc71;
 }
-#b1:hover{
+#b1:hover,#b2:hover{
     background-color: #e4dc71a4;
     color: white;
 }
@@ -183,10 +179,6 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #e4dc71;
 }
-#b2:hover{
-    background-color: #e4dc71;
-    color: black;
-}
 #l1{
     cursor: pointer;
     margin-top: 10px;
@@ -197,7 +189,7 @@ input::placeholder, textarea::placeholder{
     border: solid;
     border-color: #c367cf;
 }
-#l1:hover{
+#l1:hover, #l2:hover{
     background-color: #c367cf59;
     color: white;
 }
@@ -208,10 +200,6 @@ input::placeholder, textarea::placeholder{
     border-radius: 5px;
     border: solid;
     border-color: #c367cf;
-}
-#l2:hover{
-    background-color: #c367cf;
-    color: black;
 }
 .cols{
     max-height: 400px;

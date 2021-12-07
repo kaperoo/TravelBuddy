@@ -94,6 +94,14 @@ def savePicture(formPicture):
     
     outputSize = (250, 250)
     i = Image.open(formPicture)
+
+    width, height = i.size
+    # crop the image to the center square
+    if width > height:
+        i = i.crop(((width-height)/2, 0, (width+height)/2, height))
+    elif height > width:
+        i = i.crop((0, (height-width)/2, width, (height+width)/2))
+
     i.thumbnail(outputSize)
     i.save(picturePath)
     
@@ -176,19 +184,40 @@ def respond():
     currCountry = Country.query.filter_by(name=ctry).first()
 
     if current_user.is_authenticated:
-        if response == 'v1':
+        if response == 'v1' and currCountry in current_user.visitedCountries:
             current_user.visitedCountries.remove(currCountry)
-        elif response == 'v2':
+        elif response == 'v2' and currCountry not in current_user.visitedCountries:
             current_user.visitedCountries.append(currCountry)
-        elif response == 'b1':
+        elif response == 'b1' and currCountry in current_user.bucketList:
             current_user.bucketList.remove(currCountry)
-        elif response == 'b2':
+        elif response == 'b2' and currCountry not in current_user.bucketList:
             current_user.bucketList.append(currCountry)
-        elif response == 'l1':
+        elif response == 'l1' and current_user in currCountry.citizens:
             currCountry.citizens.remove(current_user)
-        elif response == 'l2':
+        elif response == 'l2' and current_user not in currCountry.citizens:
             currCountry.citizens.append(current_user)
 
         db.session.commit()
 
-    return json.dumps({'status': 'OK', 'response': response, 'ctry':ctry})
+    return json.dumps({'status': 'OK', 'response': response, 'ctry':ctry, 'username':current_user.username})
+
+@app.route('/ctryrmv', methods=['POST'])
+def ctryrmv():
+    # Parse the JSON data included in the request
+    data = json.loads(request.data)
+    response = data.get('response')
+    col = data.get('list')
+
+    country = Country.query.filter_by(name=response).first()
+
+    if current_user.is_authenticated:
+        if col == 'vs' and country in current_user.visitedCountries:
+            current_user.visitedCountries.remove(Country.query.filter_by(name=response).first())
+        elif col == 'bs' and country in current_user.bucketList:
+            current_user.bucketList.remove(Country.query.filter_by(name=response).first())
+        elif col == 'ls' and current_user in country.citizens:
+            Country.query.filter_by(name=response).first().citizens.remove(current_user)
+
+        db.session.commit()
+
+    return json.dumps({'status': 'OK', 'response': response, 'col':col})

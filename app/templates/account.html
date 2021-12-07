@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="../static/scripts/listaccount.js"></script>
 <div class="container accinfo">
     <div class="row justify-content-center mt-2">
         <img class="rounded-circle account-img" src="{{imageFile}}">
@@ -15,35 +16,35 @@
     </div>
 
     <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-md-3 col-sm-12 mb-1 cols">
+        <div class="col-md-3 col-sm-12 mb-1 cols" id="vs">
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 visp">
                 <h4 class="mb-0 pl-2">Visited:</h4>
             </div>
             {% for v in current_user.visitedCountries %}
-            <div class="row vis pl-2 pt-1">
-                <h4>{{v.name}}</h4>
+            <div class="row d-flex flex-row justify-content-between align-items-center vis rgreen place" id="{{v.name}}">
+                <h4 class="mb-0 pl-2 pt-1 pb-1">{{v.name}}</h4><i class="ivis fas fa-times pr-2 d-none"></i>
             </div>
             {% endfor %}
         </div>
 
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols">
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols" id="bs">
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 fvisp">
                 <h4 class="mb-0 pl-2">Bucket List:</h4>
             </div>
             {% for b in current_user.bucketList %}
-            <div class="row fvis pl-2 pt-1">
-                <h4>{{b.name}}</h4>
+            <div class="row d-flex flex-row justify-content-between align-items-center fvis ryellow place" id="{{b.name}}">
+                <h4 class="mb-0 pl-2 pt-1 pb-1">{{b.name}}</h4><i class="ibuc fas fa-times pr-2 d-none"></i>
             </div>
             {% endfor %}
         </div>
 
-        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols">
+        <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols" id="ls">
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 livp">
                 <h4 class="mb-0 pl-2">Lives In:</h4>
             </div>
             {% if current_user.livesin %}
-            <div class="row liv pl-2 pt-1">
-                <h4>{{current_user.livesin.name}}</h4>
+            <div class="row d-flex flex-row justify-content-between align-items-center liv rpurple place" id="{{current_user.livesin.name}}">
+                <h4 class="mb-0 pl-2 pt-1 pb-1">{{current_user.livesin.name}}</h4><i class="iliv fas fa-times pr-2 d-none"></i>
             </div>
             {% endif %}
         </div>

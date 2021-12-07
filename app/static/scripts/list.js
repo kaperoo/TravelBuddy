@@ -40,7 +40,43 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(response){
-                console.log(response);
+                
+                if (response['response']=='v1'){
+                    $("#v1").attr("id","v2");
+                    $("#v2 h4").text("Mark as Visited");
+                    $(".ivis").remove();
+                    $("#vs #"+response['username']).remove();
+                }
+                else if (response['response']=='v2'){
+                    $("#v2").attr("id","v1");
+                    $("#v1 h4").text("Visited");
+                    $("#v1 .row").append("<i class='fa fa-check ivis pr-2'></i>");
+                    $("#vs").append("<div class='row vis pl-2 pt-1 rgreen' id='"+response['username']+"'><h4>@"+response['username']+"</h4></div>");
+                }
+                else if (response['response']=='b1'){
+                    $("#b1").attr("id","b2");
+                    $("#b2 h4").text("Add to Bucket List");
+                    $(".ibuc").remove();
+                    $("#bs #"+response['username']).remove();
+                }
+                else if (response['response']=='b2'){
+                    $("#b2").attr("id","b1");
+                    $("#b1 h4").text("On Bucket List");
+                    $("#b1 .row").append("<i class='fa fa-check ibuc pr-2'></i>");
+                    $("#bs").append("<div class='row fvis pl-2 pt-1 ryellow' id='"+response['username']+"'><h4>@"+response['username']+"</h4></div>");
+                }
+                else if (response['response']=='l1'){
+                    $("#l1").attr("id","l2");
+                    $("#l2 h4").text("Mark as Home");
+                    $(".iliv").remove();
+                    $("#ls #"+response['username']).remove();
+                }
+                else if (response['response']=='l2'){
+                    $("#l2").attr("id","l1");
+                    $("#l1 h4").text("You Live Here");
+                    $("#l1 .row").append("<i class='fa fa-check iliv pr-2'></i>");
+                    $("#ls").append("<div class='row liv pl-2 pt-1 rpurple' id='"+response['username']+"'><h4>@"+response['username']+"</h4></div>");
+                }
             }
         });
     });
