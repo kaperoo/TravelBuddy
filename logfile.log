@@ -1,2 +1,17 @@
 [2021-12-07 22:00:23,081] INFO: app: kaperoo logged in
 [2021-12-07 22:00:32,338] INFO: app: kaperoo logged out
+[2021-12-07 22:26:35,917] INFO: app: kaperoo logged in
+[2021-12-07 22:43:38,279] ERROR: app: Route /country failed to execute error= 'NoneType' object has no attribute 'name'
+[2021-12-07 22:59:45,153] ERROR: app: Route "/profile/<username>" failed to execute error="'NoneType' object has no attribute 'profilePicture'"
+[2021-12-08 00:36:47,048] INFO: app: kaperoo logged in
+[2021-12-08 00:37:57,874] INFO: app: kaperoo added Croatia to their visited countries
+[2021-12-08 00:39:30,699] INFO: app: kaperoo removed Croatia from their visited countries
+[2021-12-08 00:39:32,063] INFO: app: kaperoo added Croatia to their visited countries
+[2021-12-08 00:39:35,107] INFO: app: kaperoo added Croatia to their bucket list
+[2021-12-08 00:39:43,564] INFO: app: kaperoo added his home country (Croatia)
+[2021-12-08 00:40:47,003] INFO: app: kaperoo removed Croatia from their bucket list
+[2021-12-08 00:40:48,637] INFO: app: kaperoo added Croatia to their bucket list
+[2021-12-08 00:40:50,000] INFO: app: kaperoo removed his home country (Croatia)
+[2021-12-08 00:40:50,868] INFO: app: kaperoo added his home country (Croatia)
+[2021-12-08 00:40:52,883] INFO: app: kaperoo removed Croatia from their visited countries
+[2021-12-08 00:40:53,632] INFO: app: kaperoo added Croatia to their visited countries

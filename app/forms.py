@@ -1,11 +1,12 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
 
-class RegistrationForm(Form):
+# Registration form
+class RegistrationForm(FlaskForm):
 	username = StringField('Username', 
 								validators=[DataRequired(), 
 								Length(min=4,max=20,message='Invalid Username Length')])
@@ -37,7 +38,7 @@ class RegistrationForm(Form):
 		if user:
 			raise ValidationError('Email already in use')
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
 	email = StringField('Email', 
 							validators=[DataRequired(),
 							Email()])
@@ -49,7 +50,7 @@ class LoginForm(Form):
 
 	submit = SubmitField('Login')
 
-class UpdateAccountForm(Form):
+class UpdateAccountForm(FlaskForm):
 	username = StringField('Username', 
 								validators=[DataRequired(), 
 								Length(min=4,max=20,message='Invalid Username Length')])
@@ -78,7 +79,7 @@ class UpdateAccountForm(Form):
 			if user:
 				raise ValidationError('Email already in use')
 
-class ChangePasswordForm(Form):
+class ChangePasswordForm(FlaskForm):
 
 
 	oldPassword = PasswordField('Old Password',

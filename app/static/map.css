@@ -1,5 +1,6 @@
 body{
     /* overflow: hidden !important; */
+    /* height: 100%; */
     color: white;
 }
 .row{
@@ -8,6 +9,7 @@ body{
     font-size: larger;
 }
 .scrollable{
+    scroll-behavior: smooth;
     height: calc(100vh - 130px);
     overflow: auto;
 }
@@ -17,9 +19,10 @@ body{
     margin: 5px; 
     padding: 3px;
 }
-.map{
+svg{
     margin: auto;
     width: 95%;
+    /* height: calc(100vh - 100px); */
 }
 svg path {
     fill: #0a2d3b;

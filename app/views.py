@@ -95,6 +95,7 @@ def login():
                            form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
     app.logger.info('%s logged out', current_user.username)
     logout_user()
@@ -264,6 +265,24 @@ def ctryrmv():
         app.logger.error('Route "/ctryrmv" failed to execute error="%s"',e)
 
     return json.dumps({'status': 'OK', 'response': response, 'col':col})
+
+@app.route('/coords', methods=['POST'])
+def coords():
+    try:
+        # Parse the JSON data included in the request
+        data = json.loads(request.data)
+        response = data.get('response')
+
+        country = Country.query.filter_by(name=response).first()
+
+        lat = country.lat
+        lang = country.lang
+        city = country.capital
+
+    except Exception as e:
+        app.logger.error('Route "/coords" failed to execute error="%s"',e)
+
+    return json.dumps({'status': 'OK', 'response': response, 'lat':lat, 'lang':lang, 'city':city})
 
 @app.route('/about')
 def about():
