@@ -1,22 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
+
+<!-- script for the user lists functionality -->
 <script src="../static/scripts/list.js"></script>
+
+<!-- info about the user -->
 <div class="container accinfo">
     <div class="row justify-content-center mt-2">
+        <!-- profile picture -->
         <img class="rounded-circle account-img" src="{{imageFile}}">
     </div>
     <div class="row justify-content-center mt-2">
+        <!-- name -->
         <h1 class="account-heading display-3">{{u.name}}</h1>
     </div>
     <div class="row justify-content-center">
+        <!-- username -->
         <h3 class="account-heading">@{{u.username}}</h3>
     </div>
     <div class="row justify-content-center">
+        <!-- email -->
         <p class="text-secondary">{{u.email}}</p>
     </div>
 
+    <!-- lists of countried connected to the given user -->
     <div class="row justify-content-center mt-5 mb-5">
         <div class="col-md-3 col-sm-12 mb-1 cols">
+            <!-- visited countries -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 visp">
                 <h4 class="mb-0 pl-2">Visited:</h4>
             </div>
@@ -28,6 +38,7 @@
         </div>
 
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols">
+            <!-- bucket list -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 fvisp">
                 <h4 class="mb-0 pl-2">Bucket List:</h4>
             </div>
@@ -39,6 +50,7 @@
         </div>
 
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols">
+            <!-- home country -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 livp">
                 <h4 class="mb-0 pl-2">Lives In:</h4>
             </div>

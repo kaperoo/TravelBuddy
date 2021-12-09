@@ -1,14 +1,18 @@
 $(document).ready(function() {
 
+    // if clicked on user, show user profile
     $(".user").click(function() {
         var username = $(this).attr('id');
         window.location = "/profile/" + username;
     });
+
+    // if clicked on place, show place page
     $(".place").click(function() {
         var country = $(this).attr('id');
         window.location = "/country/" + country;
     });
 
+    // when hovering over a place, change the icon
     $("#l1").hover(function() {
         $(".iliv").addClass("fa-times");
         $(".iliv").removeClass("fa-check");
@@ -31,6 +35,7 @@ $(document).ready(function() {
         $(".ivis").addClass("fa-check");
     });
     
+    // Ajax with flask-restful to update the page without refreshing
     $(".dbb").click(function() {
         $.ajax({
             url: '/respond',
@@ -41,6 +46,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response){
                 
+                // check response and update the page
                 if (response['response']=='v1'){
                     $("#v1").attr("id","v2");
                     $("#v2 h4").text("Mark as Visited");

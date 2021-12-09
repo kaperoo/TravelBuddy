@@ -4,39 +4,49 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <!-- scripts with ajax and jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="../static/scripts/distance.js"></script>
         <script src="../static/scripts/list.js"></script>
     </head>
     <body>
 
+<!-- information about country -->
 <div class="container ctry">
     <div class="row justify-content-center">
+        <!-- country flag -->
         <img src="{{imageFile}}" alt="{{c.name}} flag" class="img-fluid mb-4 flaga"></img>
     </div>
     <div class="row justify-content-center">
+        <!-- country name -->
         <h1 id="countryName"><b>{{c.name}}</b></h1>
     </div>
     <div class="row justify-content-center" id="capital">
+        <!-- capital -->
         <h3>Capital: {{c.capital}}</h3>    
     </div>
     <div class="row justify-content-center">
+        <!-- language -->
         <h4 class="text-secondary"><em>Language: {{c.language}}</em></h4>
     </div>
     <div class="row justify-content-center mb-5">
+        <!-- currency -->
         <h4 class="text-secondary"><em>Currency: {{c.currency}}</em></h4>
     </div>
 
     {% if current_user.is_authenticated %}
+    <!-- display buttons if the user is authenticated -->
     <div class="row justify-content-center">
         
         {% if current_user in c.visitors %}
+        <!-- if the user is already visiting the country -->
         <div class="col-md-3 col-sm-12 mb-1 dbb" id="v1">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Visited</h4><i class="ivis fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
+        <!-- if the user is not visiting the country -->
         <div class="col-md-3 col-sm-12 mb-1 dbb" id="v2">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Mark as Visited</h4><i class="d-none ivis fas fa-check pr-2"></i>
@@ -45,12 +55,14 @@
         {% endif %}
 
         {% if current_user in c.futureVisitors %}
+        <!-- if the user already wants to visit the country -->
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="b1">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
                 <h4 class="mb-0 pl-2">On Bucket List</h4><i class="ibuc fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
+        <!-- if the user does not want to visit the country -->
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="b2">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Add to Bucket List</h4><i class="d-none ibuc fas fa-check pr-2"></i>
@@ -59,12 +71,14 @@
         {% endif %}
 
         {% if current_user in c.citizens %}
+        <!-- if the user is already a citizen of the country -->
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="l1">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between pt-1 pb-1">
                 <h4 class="mb-0 pl-2">You Live Here</h4><i class="iliv fas fa-check pr-2"></i>
             </div>
         </div>
         {% else %}
+        <!-- if the user is not a citizen of the country -->
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 dbb" id="l2">
             <div class="row h-100 d-flex flex-row align-items-center justify-content-between  pt-1 pb-1">
                 <h4 class="mb-0 pl-2">Mark as Home</h4><i class="d-none iliv fas fa-check pr-2"></i>
@@ -75,6 +89,7 @@
     </div>
     {% endif %}
 
+    <!-- lists of users connected to the country -->
     <div class="row justify-content-center">
         <div class="col-md-3 col-sm-12 mb-5 cols" id="vs">
             <div class="row visp d-flex flex-row align-items-center pt-1 pb-1">

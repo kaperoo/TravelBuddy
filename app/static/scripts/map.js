@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // highlight the map when hovering over a list
     $(".crow").hover(function() {
         var classname = $(this).attr('id');
 
@@ -13,12 +14,15 @@ $(document).ready(function() {
 
         $("svg path[name=\"" + classname + "\"]").css("fill", "#0a2d3b");
     });
+
+    // go to the clicked country page
     $(".crow").click(function() {
         var classname = $(this).attr('id');
 
         window.location = "/country/" + classname;
     });
 
+    // highlight the list when hovering over a map
     $("svg path").hover(function() {
         var name = $(this).attr('name');
 
@@ -40,12 +44,15 @@ $(document).ready(function() {
             "font-weight": "normal",
         });
     });
+
+    // go to the clicked country page
     $("svg path").click(function() {
         var name = $(this).attr('name');
 
         window.location = "/country/" + name;
     });
 
+    // scale the scroll area appropriately to the position and window size
     $(window).resize(function() {
         var scrollP = $(".scrollable").position();
         $(".scrollable").css({

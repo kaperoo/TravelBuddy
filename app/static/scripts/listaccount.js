@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // ajax to delete the country from users lists
     $(".place").click(function() {
         $.ajax({
             url: '/ctryrmv',
@@ -14,6 +15,7 @@ $(document).ready(function() {
         });
     });
 
+    // on hover display 'x' icon
     $(".place").hover(function() {
         $(this).children("i").removeClass("d-none");
     },function() {

@@ -1,6 +1,4 @@
 body{
-    /* overflow: hidden !important; */
-    /* height: 100%; */
     color: white;
 }
 .row{
@@ -22,7 +20,6 @@ body{
 svg{
     margin: auto;
     width: 95%;
-    /* height: calc(100vh - 100px); */
 }
 svg path {
     fill: #0a2d3b;

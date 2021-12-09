@@ -1,3 +1,4 @@
+// Cookies alert
 window.addEventListener("load", function () {
     window.cookieconsent.initialise({
     "palette": {

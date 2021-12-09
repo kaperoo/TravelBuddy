@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Add bootstrap, stylesheet, and googlefonts links -->
+    <!-- Add bootstrap, stylesheet, googlefonts, scripts, and icons links -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -41,7 +41,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <!-- Here the active list defines whick page is an active page -->
+                <!-- Display different navbar depending on the user -->
                 <a class="nav-item nav-link active" href="/">Map<span class="sr-only"></span></a>
                 <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
                 {% if current_user.is_authenticated %}                    
@@ -63,6 +63,7 @@
     <div>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
+        <!-- Display alerts -->
             {% for category, message in messages %}
                 <div class="alert alert-{{category}} alert-dismissible fade show">
                     {{ message }}

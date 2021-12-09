@@ -1,22 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- script to manage the user lists -->
 <script src="../static/scripts/listaccount.js"></script>
+
+<!-- Info about the user -->
 <div class="container accinfo">
     <div class="row justify-content-center mt-2">
+        <!-- Profile picture -->
         <img class="rounded-circle account-img" src="{{imageFile}}">
     </div>
     <div class="row justify-content-center mt-2">
+        <!-- Name -->
         <h1 class="account-heading display-3">{{current_user.name}}</h1>
     </div>
     <div class="row justify-content-center">
+        <!-- Username -->
         <h3 class="account-heading">@{{current_user.username}}</h3>
     </div>
     <div class="row justify-content-center">
+        <!-- Email -->
         <p class="text-secondary">{{current_user.email}}</p>
     </div>
 
     <div class="row justify-content-center mt-5 mb-5">
+        <!-- Coulumns with visited, bucket listed, and home countries -->
         <div class="col-md-3 col-sm-12 mb-1 cols" id="vs">
+            <!-- Visited -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 visp">
                 <h4 class="mb-0 pl-2">Visited:</h4>
             </div>
@@ -28,6 +37,7 @@
         </div>
 
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols" id="bs">
+            <!-- Bucket listed -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 fvisp">
                 <h4 class="mb-0 pl-2">Bucket List:</h4>
             </div>
@@ -39,6 +49,7 @@
         </div>
 
         <div class="col-md-3 col-sm-12 offset-md-1 mb-1 cols" id="ls">
+            <!-- Home countries -->
             <div class="row d-flex flex-row align-items-center pt-1 pb-1 livp">
                 <h4 class="mb-0 pl-2">Lives In:</h4>
             </div>
@@ -51,13 +62,16 @@
 
     </div>
 
+    <!-- Form to update the user profile -->
     <div class="row">
         <div class="col">
             <form action="" method="post" enctype="multipart/form-data">
                 {{form.hidden_tag()}}
                 <fieldset class="form-group">
+                    <!-- Update the username, name, email or profilepicture -->
                     <legend class="border-bottom mb-4 text-center">Update Account</legend>
                     <div class="form-group">
+                        <!-- update username -->
                         {{form.username.label(class="form-control-label")}}
                         {% if form.username.errors %}
                             {{form.username(class="form-control is-invalid form-control-lg")}}
@@ -71,6 +85,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        <!-- update name -->
                         {{form.name.label(class="form-control-label")}}
                         {% if form.name.errors %}
                             {{form.name(class="form-control is-invalid form-control-lg")}}
@@ -84,6 +99,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        <!-- update email -->
                         {{form.email.label(class="form-control-label")}}
                         {% if form.email.errors %}
                             {{form.email(class="form-control is-invalid form-control-lg")}}
@@ -97,6 +113,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group picform">
+                        <!-- update profile picture -->
                         {{form.picture.label()}}
                         {{form.picture(class="form-control-file")}}
                         {% if form.picture.errors %}
@@ -120,6 +137,7 @@
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4 text-center">Change Password</legend>
                     <div class="form-group">
+                        <!-- update password -->
                         {{passForm.oldPassword.label(class="form-control-label")}}
                         {% if passForm.oldPassword.errors %}
                             {{passForm.oldPassword(class="form-control is-invalid form-control-lg")}}
@@ -133,6 +151,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        <!-- new password -->
                         {{passForm.newPassword.label(class="form-control-label")}}
                         {% if passForm.newPassword.errors %}
                             {{passForm.newPassword(class="form-control is-invalid form-control-lg")}}
@@ -146,6 +165,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        <!-- confirm password -->
                         {{passForm.confirmPassword.label(class="form-control-label")}}
                         {% if passForm.confirmPassword.errors %}
                             {{passForm.confirmPassword(class="form-control is-invalid form-control-lg")}}
