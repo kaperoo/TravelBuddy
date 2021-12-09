@@ -156,6 +156,80 @@ class TestCase(unittest.TestCase):
                                follow_redirects=True)
         self.assertEqual(response.status_code, 403)
 
+    # test login
+    def test_login(self):
+        response = self.app.post('/login',
+                                data=dict(username="johnny123", password="123"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_wrong_password(self):
+        response = self.app.post('/login',
+                                data=dict(username="johnny123", password="1234"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_wrong_username(self):
+        response = self.app.post('/login',
+                                data=dict(username="johnny1234", password="123"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_empty_username(self):
+        response = self.app.post('/login',
+                                data=dict(username="", password="123"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_empty_password(self):
+        response = self.app.post('/login',
+                                data=dict(username="johnny123", password=""),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    # test register
+    def test_register(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="mark123", password="123", email="mark@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_empty_name(self):
+        response = self.app.post('/register',
+                                data=dict(name="", username="mark123", password="123", email="mark@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_empty_username(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="", password="123", email="mark@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_empty_password(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="mark123", password="", email="mark@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_empty_email(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="mark123", password="123", email=""),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_existing_username(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="johnny123", password="123", email="mark@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_existing_email(self):
+        response = self.app.post('/register',
+                                data=dict(name="Mark", username="mark123", password="123", email="john@email.com"),
+                                follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
 if __name__ == '__main__':
     unittest.main()
 

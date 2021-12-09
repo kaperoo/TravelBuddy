@@ -15,3 +15,10 @@
 [2021-12-08 00:40:50,868] INFO: app: kaperoo added his home country (Croatia)
 [2021-12-08 00:40:52,883] INFO: app: kaperoo removed Croatia from their visited countries
 [2021-12-08 00:40:53,632] INFO: app: kaperoo added Croatia to their visited countries
+[2021-12-08 23:52:58,538] INFO: app: kaperoo logged in
+[2021-12-08 23:53:07,100] INFO: app: kaperoo added his home country (Poland)
+[2021-12-08 23:53:30,331] INFO: app: kaperoo added Cyprus to their visited countries
+[2021-12-08 23:56:40,922] ERROR: app: Route "/profile/<username>" failed to execute error="'NoneType' object has no attribute 'profilePicture'"
+[2021-12-08 23:56:40,964] ERROR: app: Route "/profile/<username>" failed to execute error="'NoneType' object has no attribute 'profilePicture'"
+[2021-12-08 23:57:52,835] ERROR: app: Route "/profile/<username>" failed to execute error="'NoneType' object has no attribute 'profilePicture'"
+[2021-12-08 23:57:52,874] ERROR: app: Route "/profile/<username>" failed to execute error="'NoneType' object has no attribute 'profilePicture'"
