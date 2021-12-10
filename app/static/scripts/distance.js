@@ -27,7 +27,7 @@ function showPosition(position){
             kms = kms.toFixed(2);
             
             // insert the distance in the html after #capital
-            $('#capital').after('<div class="row justify-content-center"><h4 id="distance">(You are ' + kms + 'km away from '+ response['city']+')</h4></div>');
+            $('#capital').after('<div class="row justify-content-center"><h4 class="text-center" id="distance">(You are ' + kms + 'km away from '+ response['city']+')</h4></div>');
         },
         // The function which will be triggered if any error occurs.
         error: function(error){
